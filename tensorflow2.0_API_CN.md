@@ -1027,6 +1027,38 @@ tf.image.transpose(
 
 ## tf.math
 
+### reduce_sum
+
+```py
+tf.math.reduce_sum(
+    input_tensor,
+    axis=None,
+    keepdims=False,
+    name=None
+)
+```
+计算一个张量维数中元素的总和
+* `input_tersor`： 进行求和计算的张量，其中元素必须为数字
+* `axis`：默认为`None`时返回所有维度元素总和，设置维度范围必须为\[-最大维数，最大维数\]，详见样例
+* `keepdims`：如果为`True`，保留维度信息
+* `name`：计算流图中该节点的自定义名称
+
+**例：**
+
+```py
+x = tf.constant([[1, 1, 1], [1, 1, 1]])
+tf.reduce_sum(x)
+>>> 6
+tf.reduce_sum(x, 0)
+>>> [2, 2, 2]
+tf.reduce_sum(x, 1)
+>>> [3, 3]
+tf.reduce_sum(x, 1, keepdims=True)
+>>> [[3], [3]]
+tf.reduce_sum(x, axis=[0, 1])
+>>> 6
+```
+
 ## tf.metrics
 
 ## tf.nest
