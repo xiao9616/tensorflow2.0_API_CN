@@ -13,7 +13,7 @@
 - [ ] tf.debugging
 - [ ] tf.distribute
 - [x] tf.dtypes
-- [ ] tf.errors
+- [x] tf.errors
 - [ ] tf.estimator
 - [ ] tf.experimental
 - [ ] tf.feature_column
