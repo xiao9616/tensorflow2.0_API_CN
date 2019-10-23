@@ -1027,6 +1027,266 @@ tf.image.transpose(
 
 ## tf.math
 
+### reduce_any
+
+```python
+tf.math.reduce_any(
+    input_tensor,
+    axis=None,
+    keepdims=False,
+    name=None
+)
+
+```
+
+计算一个张量中元素的”逻辑或”。
+
+* `input_tensor`： 进行逻辑或计算的张量，其中元素必须为**布尔型**
+
+* `axis`：默认为`None`时返回所有维度元素总和，设置维度范围必须为\[-最大维数，最大维数\]，详见样例
+
+* `keepdims`：如果为`True`，保留维度信息
+
+* `name`：计算流图中该节点的自定义名称
+
+**例：**
+
+```python
+x = tf.constant([[True,  True], [False, False]])
+tf.reduce_any(x)  # True
+tf.reduce_any(x, 0)  # [True, True]
+tf.reduce_any(x, 1)  # [True, False]
+```
+
+### reduce_euclidean_norm
+
+```python
+tf.math.reduce_euclidean_norm(
+    input_tensor,
+    axis=None,
+    keepdims=False,
+    name=None
+)
+```
+
+计算一个张量中元素的欧几里得范数（距离范数）。
+$$
+f(x) = \sqrt{x_1^2 + x_2^2 +...+x_n^2}
+$$
+
+* `input_tensor`： 进行距离范数计算的张量，其中元素必须为**数字**
+
+* `axis`：默认为`None`时返回所有维度元素总和，设置维度范围必须为\[-最大维数，最大维数\]，详见样例
+
+* `keepdims`：如果为`True`，保留维度信息
+
+* `name`：计算流图中该节点的自定义名称
+
+**例：**
+
+```python
+x = tf.constant([[1, 2, 3], [1, 1, 1]])
+tf.reduce_euclidean_norm(x)  # sqrt(17)
+tf.reduce_euclidean_norm(x, 0)  # [sqrt(2), sqrt(5), sqrt(10)]
+tf.reduce_euclidean_norm(x, 1)  # [sqrt(14), sqrt(3)]
+tf.reduce_euclidean_norm(x, 1, keepdims=True)  # [[sqrt(14)], [sqrt(3)]]
+tf.reduce_euclidean_norm(x, [0, 1])  # sqrt(17)
+```
+
+### reduce_logsumexp
+
+```python
+tf.math.reduce_logsumexp(
+    input_tensor,
+	axis=None,
+	keepdims=False,
+	name=None
+)
+```
+
+计算一个张量中以e为底、各元素次幂之和的自然对数。
+$$
+f(x) = ln(e^{x_{11}} + e^{x_{12}} + e^{x_{13}} + e^{x_{21}} + ...+e^{x_{mn}} )
+$$
+
+* `input_tensor`： 进行求对数和计算的张量，其中元素必须为**数字**
+
+* `axis`：默认为`None`时返回所有维度元素总和，设置维度范围必须为\[-最大维数，最大维数\]，详见样例
+
+* `keepdims`：如果为`True`，保留维度信息
+
+* `name`：计算流图中该节点的自定义名称
+
+**例：**
+
+```python
+x = tf.constant([[1.0, 3.0], [5.0, 2.0]])
+tf.reduce_logsumexp(x)  # ln(e^1 + e^3 + e^5 + e^2)
+>>> 5.1851826
+tf.reduce_logsumexp(x, 0)  # [ln(e^1 + e^5), ln(e^3 + e^2)]
+>>> [5.01815, 3.3132617]
+tf.reduce_logsumexp(x, 1)  # [ln(e^1 + e^3), ln(e^5 + e^2)]
+>>> [3.126928, 5.0485873]
+```
+
+### reduce_max
+
+```python
+tf.math.reduce_max(
+    input_tensor,
+    axis=None,
+    keepdims=False,
+    name=None
+)
+```
+
+计算一个张量元素中的最大值。
+
+* `input_tensor`： 进行求最大值计算的张量，其中元素必须为**数字**
+
+* `axis`：默认为`None`时返回所有维度元素总和，设置维度范围必须为\[-最大维数，最大维数\]，详见样例
+
+* `keepdims`：如果为`True`，保留维度信息
+
+* `name`：计算流图中该节点的自定义名称
+
+**例：**
+
+```python
+x = tf.constant([[1., 2.], [3., 4.]])
+tf.reduce_max(x)
+>>> 4.0
+tf.reduce_max(x, axis=0)
+>>> [3.0, 4.0]
+```
+
+### reduce_mean
+
+```python
+tf.math.reduce_mean(
+    input_tensor,
+    axis=None,
+    keepdims=False,
+    name=None
+)
+```
+
+计算一个张量元素中的平均值。
+
+* `input_tensor`： 进行求平均值计算的张量，其中元素必须为**数字**
+
+* `axis`：默认为`None`时返回所有维度元素总和，设置维度范围必须为\[-最大维数，最大维数\]，详见样例
+
+* `keepdims`：如果为`True`，保留维度信息
+
+* `name`：计算流图中该节点的自定义名称
+
+**例：**
+
+```python
+x = tf.constant([[1., 2.], [3., 4.]])
+tf.reduce_mean(x)
+>>> 2.0
+tf.reduce_mean(x, axis=0)
+>>> [2.0, 3.0]
+```
+
+### reduce_min
+
+```python
+tf.math.reduce_min(
+    input_tensor,
+    axis=None,
+    keepdims=False,
+    name=None
+)
+```
+
+计算一个张量元素中的最小值。
+
+* `input_tensor`： 进行求最小值计算的张量，其中元素必须为**数字**
+
+* `axis`：默认为`None`时返回所有维度元素总和，设置维度范围必须为\[-最大维数，最大维数\]，详见样例
+
+* `keepdims`：如果为`True`，保留维度信息
+
+* `name`：计算流图中该节点的自定义名称
+
+**例：**
+
+```python
+x = tf.constant([[1., 2.], [3., 4.]])
+tf.reduce_min(x)
+>>> 1.0
+tf.reduce_min(x, axis=0)
+>>> [1.0, 2.0]
+```
+
+### reduce_prod
+
+```python
+tf.math.reduce_prod(
+    input_tensor,
+    axis=None,
+    keepdims=False,
+    name=None
+)
+```
+
+计算一个张量中元素的乘积。
+
+* `input_tensor`： 进行求乘积计算的张量，其中元素必须为**数字**
+
+* `axis`：默认为`None`时返回所有维度元素总和，设置维度范围必须为\[-最大维数，最大维数\]，详见样例
+
+* `keepdims`：如果为`True`，保留维度信息
+
+* `name`：计算流图中该节点的自定义名称
+
+**例：**
+```py
+x = tf.constant([[1., 2.], [3., 4.]])
+tf.reduce_prod(x)
+>>> 24.0
+tf.reduce_prod(x, axis=0)
+>>> [3.0, 8.0]
+tf.reduce_prod(x, axis=1)
+>>> [2.0, 12.0]
+tf.reduce_prod(x, axis=0, keepdims=True)
+>>> [[3.0, 8.0]]
+tf.reduce_prod(x, axis=0, keepdims=True)
+>>> [[2.0],
+     [12.0]]
+```
+
+### reduce_std
+
+```py
+tf.math.reduce_std(
+    input_tensor,
+    axis=None,
+    keepdims=False,
+    name=None
+)
+```
+计算一个张量中元素的标准差。
+* `input_tensor`： 进行求标准差计算的张量，其中元素必须为**数字**
+* `axis`：默认为`None`时返回所有维度元素总和，设置维度范围必须为\[-最大维数，最大维数\]，详见样例
+* `keepdims`：如果为`True`，保留维度信息
+* `name`：计算流图中该节点的自定义名称
+
+**例：**
+
+```py
+x = tf.constant([[1., 2.], [3., 4.]])
+tf.reduce_std(x) # 所有元素
+>>> 1.1180339887498949
+tf.reduce_std(x, 0) # 第0维度，竖向
+>>> [1., 1.]
+tf.reduce_std(x, 1) # 第1维度，横向
+>>> [0.5,  0.5]
+```
+
 ### reduce_sum
 
 ```py
@@ -1037,8 +1297,8 @@ tf.math.reduce_sum(
     name=None
 )
 ```
-计算一个张量维数中元素的总和
-* `input_tersor`： 进行求和计算的张量，其中元素必须为数字
+计算一个张量维数中元素的总和。
+* `input_tensor`： 进行求和计算的张量，其中元素必须为**数字**
 * `axis`：默认为`None`时返回所有维度元素总和，设置维度范围必须为\[-最大维数，最大维数\]，详见样例
 * `keepdims`：如果为`True`，保留维度信息
 * `name`：计算流图中该节点的自定义名称
